@@ -103,12 +103,6 @@ export default function AboutPage() {
           opacity: 0.2;
         }
 
-        .about-image-wrapper img {
-          object-fit: cover;
-          width: 100%;
-          height: 100%;
-        }
-
         .about-gallery-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
@@ -465,10 +459,10 @@ export default function AboutPage() {
 
             <div className="about-values-grid">
               {[
-                { icon: "", title: "Fair Trade", desc: "We work directly with artisans, ensuring fair wages and sustainable livelihoods for every family we partner with." },
-                { icon: "", title: "Natural Materials", desc: "From indigo dyes to hand-carved wood, we use materials that honor both tradition and the environment." },
-                { icon: "", title: "Generational Skill", desc: "Many of our artisans learned their craft from parents and grandparents, keeping centuries-old techniques alive." },
-                { icon: "", title: "Authentic Craft", desc: "Every piece is made by hand, with the unique imperfections that make each creation one-of-a-kind." },
+                { icon: "🤝", title: "Fair Trade", desc: "We work directly with artisans, ensuring fair wages and sustainable livelihoods for every family we partner with." },
+                { icon: "🌿", title: "Natural Materials", desc: "From indigo dyes to hand-carved wood, we use materials that honor both tradition and the environment." },
+                { icon: "🧑‍🎨", title: "Generational Skill", desc: "Many of our artisans learned their craft from parents and grandparents, keeping centuries-old techniques alive." },
+                { icon: "✨", title: "Authentic Craft", desc: "Every piece is made by hand, with the unique imperfections that make each creation one-of-a-kind." },
               ].map((value, index) => (
                 <div key={index} className="about-value-card">
                   <span className="icon">{value.icon}</span>
@@ -575,6 +569,7 @@ export default function AboutPage() {
               </div>
             </div>
 
+            {/* FIXED: Removed duplicate margin property */}
             <div style={{
               padding: "24px 28px",
               background: "rgba(255, 253, 248, 0.4)",
@@ -591,13 +586,12 @@ export default function AboutPage() {
                 Sourcing Details
               </h3>
               <p style={{
-                margin: 0,
+                margin: "0 auto",
                 fontSize: 14,
                 color: "#6b5f54",
                 fontWeight: 300,
                 lineHeight: 1.7,
                 maxWidth: 540,
-                margin: "0 auto",
               }}>
                 We source directly from artisans, ensuring authenticity and fair trade 
                 practices in every piece we showcase.

@@ -135,17 +135,10 @@ export function ProductCard({ product, onView }: Props) {
         .product-footer {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: flex-end;
           padding-top: 12px;
           border-top: 1px solid rgba(36, 26, 21, 0.04);
           margin-top: 4px;
-        }
-
-        .product-price {
-          font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
-          font-size: 18px;
-          font-weight: 600;
-          color: #4d0e17;
         }
 
         .product-view-btn {
@@ -188,9 +181,6 @@ export function ProductCard({ product, onView }: Props) {
           .product-description {
             font-size: 12.5px;
           }
-          .product-price {
-            font-size: 16px;
-          }
         }
       `}</style>
 
@@ -225,9 +215,6 @@ export function ProductCard({ product, onView }: Props) {
           <p className="product-description">{product.description}</p>
           
           <div className="product-footer">
-            {product.price && (
-              <span className="product-price">₹{product.price}</span>
-            )}
             <button 
               className="product-view-btn" 
               type="button" 

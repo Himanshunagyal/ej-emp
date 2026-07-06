@@ -37,6 +37,18 @@ export function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, [isMobileMenuOpen]);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <style>{`
@@ -233,38 +245,133 @@ export function Header() {
           transform: rotate(-45deg) translate(5px, -5px);
         }
 
-        /* Mobile Navigation */
-        .nav-mobile {
-          display: none;
+        /* Mobile Navigation - Slide in from right */
+        .nav-mobile-overlay {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background: rgba(77, 14, 23, 0.98);
+          background: rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
+          z-index: 55;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .nav-mobile-overlay.open {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .nav-mobile {
+          position: fixed;
+          top: 0;
+          right: -100%;
+          width: 320px;
+          max-width: 85vw;
+          height: 100%;
+          background: #4d0e17;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
+          z-index: 56;
+          padding: 80px 32px 40px;
+          display: flex;
           flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 24px;
-          padding: 40px;
-          z-index: 45;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.4s ease;
+          transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          overflow-y: auto;
+          box-shadow: -10px 0 40px rgba(0, 0, 0, 0.2);
         }
 
         .nav-mobile.open {
+          right: 0;
+        }
+
+        .nav-mobile .nav-close-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: transparent;
+          border: none;
+          color: #f6f0e4;
+          font-size: 24px;
+          cursor: pointer;
+          padding: 8px;
+          transition: all 0.3s ease;
+        }
+
+        .nav-mobile .nav-close-btn:hover {
+          transform: rotate(90deg);
+          color: #cdaa66;
+        }
+
+        .nav-mobile .nav-logo {
+          margin-bottom: 40px;
+          border-bottom: 1px solid rgba(168, 130, 61, 0.1);
+          padding-bottom: 20px;
+        }
+
+        .nav-mobile .nav-logo .logo-text {
+          font-family: "Cormorant Garamond", Georgia, serif;
+          font-size: 22px;
+          font-weight: 500;
+          color: #f6f0e4;
+          letter-spacing: 0.02em;
+        }
+
+        .nav-mobile .nav-logo .logo-text .gold {
+          color: #cdaa66;
+        }
+
+        .nav-mobile .nav-links {
           display: flex;
-          opacity: 1;
-          pointer-events: all;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
         }
 
         .nav-mobile .nav-link {
-          font-size: 18px;
-          padding: 12px 24px;
-          letter-spacing: 0.15em;
+          color: #f6f0e4;
+          text-decoration: none;
+          padding: 14px 16px;
+          transition: all 0.3s ease;
+          border: 1px solid transparent;
+          border-radius: 2px;
+          letter-spacing: 0.1em;
+          font-size: 16px;
+          font-weight: 400;
+          width: 100%;
+          text-align: left;
+        }
+
+        .nav-mobile .nav-link:hover {
+          color: #cdaa66;
+          border-color: rgba(168, 130, 61, 0.2);
+          background: rgba(168, 130, 61, 0.05);
+        }
+
+        .nav-mobile .nav-link.active {
+          color: #cdaa66;
+          border-color: rgba(168, 130, 61, 0.2);
+          background: rgba(168, 130, 61, 0.05);
+        }
+
+        .nav-mobile .nav-footer {
+          margin-top: auto;
+          padding-top: 20px;
+          border-top: 1px solid rgba(168, 130, 61, 0.1);
+          font-family: "Jost", sans-serif;
+          font-size: 11px;
+          color: rgba(255, 253, 248, 0.3);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          text-align: center;
+        }
+
+        .nav-mobile .nav-footer span {
+          color: #b9862f;
         }
 
         /* Ornamental rule */
@@ -312,25 +419,6 @@ export function Header() {
           .mobile-menu-btn {
             display: flex;
           }
-
-          .nav-mobile {
-            display: flex;
-            opacity: 0;
-            pointer-events: none;
-          }
-
-          .nav-mobile.open {
-            opacity: 1;
-            pointer-events: all;
-          }
-
-          .nav-mobile .nav-link {
-            font-size: 16px;
-          }
-
-          .header-wrapper.transparent .header-container {
-            padding: 0;
-          }
         }
 
         @media (max-width: 480px) {
@@ -358,17 +446,19 @@ export function Header() {
             font-size: 14px;
           }
 
-          .nav-mobile .nav-link {
-            font-size: 14px;
-            padding: 10px 20px;
+          .nav-mobile {
+            width: 280px;
+            padding: 70px 24px 32px;
           }
 
-          .header-wrapper.transparent .header-container {
-            padding: 0;
+          .nav-mobile .nav-link {
+            font-size: 15px;
+            padding: 12px 14px;
           }
         }
 
         @media (min-width: 769px) {
+          .nav-mobile-overlay,
           .nav-mobile {
             display: none !important;
           }
@@ -431,29 +521,46 @@ export function Header() {
               <span />
               <span />
             </button>
+          </div>
+        </div>
 
-            {/* Mobile Navigation */}
-            <div className={`nav-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
-              {nav.map((item) => (
-                <Link 
-                  key={item.href} 
-                  href={item.href}
-                  className="nav-link"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  style={{
-                    color: "#f6f0e4",
-                    fontSize: "18px",
-                    padding: "12px 24px",
-                    letterSpacing: "0.15em",
-                  }}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
+        {/* Mobile Menu Overlay */}
+        <div 
+          className={`nav-mobile-overlay ${isMobileMenuOpen ? 'open' : ''}`}
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
 
-            {/* Ornamental rule */}
-            <div className="header-rule" aria-hidden="true" />
+        {/* Mobile Menu Panel - Slides in from right */}
+        <div className={`nav-mobile ${isMobileMenuOpen ? 'open' : ''}`}>
+          <button 
+            className="nav-close-btn"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+
+          <div className="nav-logo">
+            <span className="logo-text">
+              Rajasthan <span className="gold">Emporium</span>
+            </span>
+          </div>
+
+          <div className="nav-links">
+            {nav.map((item) => (
+              <Link 
+                key={item.href} 
+                href={item.href}
+                className="nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="nav-footer">
+            <span>✦</span> Art with Soul <span>✦</span>
           </div>
         </div>
       </header>

@@ -1084,6 +1084,410 @@ function useScrollAnimation() {
 }
 
 /* =========================================================================
+   FULL WIDTH STORY SECTION 2 - Heritage & Craftsmanship
+   ========================================================================= */
+function FullWidthStorySectionTwo() {
+  const { elementRef, isVisible } = useScrollAnimation();
+
+  return (
+    <>
+      <style>{`
+        .full-story-two {
+          position: relative;
+          overflow: hidden;
+          min-height: 70vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--sand);
+        }
+
+        .full-story-two .image-wrapper {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+        }
+
+        .full-story-two .image-wrapper img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .full-story-two .overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg,
+            rgba(36, 26, 21, 0.1) 0%,
+            rgba(36, 26, 21, 0.3) 40%,
+            rgba(36, 26, 21, 0.5) 70%,
+            rgba(36, 26, 21, 0.7) 100%
+          );
+          z-index: 1;
+        }
+
+        .full-story-two .content {
+          position: relative;
+          z-index: 2;
+          max-width: 680px;
+          padding: 60px 24px;
+          text-align: center;
+          color: var(--paper);
+        }
+
+        .full-story-two .tag {
+          font-family: "Jost", sans-serif;
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.32em;
+          text-transform: uppercase;
+          color: var(--marigold-soft);
+          margin-bottom: 16px;
+          display: block;
+        }
+
+        .full-story-two .title {
+          font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+          font-size: clamp(28px, 4vw, 44px);
+          font-weight: 550;
+          color: var(--paper);
+          margin: 0 0 14px;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
+        }
+
+        .full-story-two .desc {
+          font-family: "Jost", sans-serif;
+          font-size: clamp(14px, 1vw, 17px);
+          font-weight: 300;
+          color: rgba(255, 253, 248, 0.8);
+          margin: 0 0 24px;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.8;
+        }
+
+        .full-story-two .btn {
+          font-family: "Jost", sans-serif;
+          font-size: 11.5px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--paper);
+          text-decoration: none;
+          border-bottom: 2px solid var(--marigold);
+          padding-bottom: 4px;
+          transition: all 0.3s ease;
+          display: inline-block;
+        }
+
+        .full-story-two .btn::after {
+          content: " →";
+          transition: transform 0.3s ease;
+          display: inline-block;
+        }
+
+        .full-story-two .btn:hover {
+          color: var(--marigold-soft);
+          border-bottom-color: var(--marigold-soft);
+        }
+
+        .full-story-two .btn:hover::after {
+          transform: translateX(6px);
+        }
+
+        .full-story-two .corner {
+          position: absolute;
+          width: 32px;
+          height: 32px;
+          border-color: rgba(255, 253, 248, 0.06);
+          border-style: solid;
+          border-width: 0;
+          z-index: 2;
+        }
+
+        .full-story-two .corner-tl { top: 20px; left: 20px; border-top-width: 1px; border-left-width: 1px; }
+        .full-story-two .corner-tr { top: 20px; right: 20px; border-top-width: 1px; border-right-width: 1px; }
+        .full-story-two .corner-bl { bottom: 20px; left: 20px; border-bottom-width: 1px; border-left-width: 1px; }
+        .full-story-two .corner-br { bottom: 20px; right: 20px; border-bottom-width: 1px; border-right-width: 1px; }
+
+        .full-story-two .slide-up {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                      transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .full-story-two .slide-up.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+          .full-story-two { min-height: 60vh; }
+          .full-story-two .title { font-size: clamp(24px, 3.5vw, 32px); }
+          .full-story-two .corner { width: 20px; height: 20px; }
+          .full-story-two .corner-tl, .full-story-two .corner-tr { top: 12px; }
+          .full-story-two .corner-bl, .full-story-two .corner-br { bottom: 12px; }
+          .full-story-two .corner-tl, .full-story-two .corner-bl { left: 12px; }
+          .full-story-two .corner-tr, .full-story-two .corner-br { right: 12px; }
+        }
+
+        @media (max-width: 600px) {
+          .full-story-two { min-height: 50vh; }
+          .full-story-two .content { padding: 40px 20px; }
+          .full-story-two .title { font-size: clamp(20px, 4vw, 26px); }
+          .full-story-two .desc { font-size: 13px; }
+          .full-story-two .corner { display: none; }
+        }
+      `}</style>
+
+      <section className="full-story-two re-sans">
+        <div className="image-wrapper">
+          <Image
+            src="https://res.cloudinary.com/dzoxwk1jc/image/upload/v1783318548/21_xj9ccx.png"
+            alt="Rajasthani heritage craftsmanship"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </div>
+        <div className="overlay" />
+
+        <span className="corner corner-tl" />
+        <span className="corner corner-tr" />
+        <span className="corner corner-bl" />
+        <span className="corner corner-br" />
+
+        <div 
+          ref={elementRef}
+          className={`content slide-up ${isVisible ? 'visible' : ''}`}
+        >
+          <span className="tag">✦ Heritage</span>
+          <h2 className="title">Where tradition meets timeless artistry</h2>
+          <p className="desc">
+            Generations of skill, passed down through families, preserving the soul of Rajasthan.
+          </p>
+          <Link href="/collections" className="btn">Explore the Legacy</Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* =========================================================================
+   FULL WIDTH STORY SECTION 3 - The Artisan's Touch
+   ========================================================================= */
+function FullWidthStorySectionThree() {
+  const { elementRef, isVisible } = useScrollAnimation();
+
+  return (
+    <>
+      <style>{`
+        .full-story-three {
+          position: relative;
+          overflow: hidden;
+          min-height: 70vh;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: var(--sand);
+        }
+
+        .full-story-three .image-wrapper {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0;
+        }
+
+        .full-story-three .image-wrapper img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        .full-story-three .overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(180deg,
+            rgba(36, 26, 21, 0.1) 0%,
+            rgba(36, 26, 21, 0.3) 40%,
+            rgba(36, 26, 21, 0.5) 70%,
+            rgba(36, 26, 21, 0.7) 100%
+          );
+          z-index: 1;
+        }
+
+        .full-story-three .content {
+          position: relative;
+          z-index: 2;
+          max-width: 680px;
+          padding: 60px 24px;
+          text-align: center;
+          color: var(--paper);
+        }
+
+        .full-story-three .tag {
+          font-family: "Jost", sans-serif;
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.32em;
+          text-transform: uppercase;
+          color: var(--marigold-soft);
+          margin-bottom: 16px;
+          display: block;
+        }
+
+        .full-story-three .title {
+          font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
+          font-size: clamp(28px, 4vw, 44px);
+          font-weight: 550;
+          color: var(--paper);
+          margin: 0 0 14px;
+          line-height: 1.1;
+          letter-spacing: -0.01em;
+        }
+
+        .full-story-three .desc {
+          font-family: "Jost", sans-serif;
+          font-size: clamp(14px, 1vw, 17px);
+          font-weight: 300;
+          color: rgba(255, 253, 248, 0.8);
+          margin: 0 0 24px;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          line-height: 1.8;
+        }
+
+        .full-story-three .btn {
+          font-family: "Jost", sans-serif;
+          font-size: 11.5px;
+          font-weight: 500;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: var(--paper);
+          text-decoration: none;
+          border-bottom: 2px solid var(--marigold);
+          padding-bottom: 4px;
+          transition: all 0.3s ease;
+          display: inline-block;
+        }
+
+        .full-story-three .btn::after {
+          content: " →";
+          transition: transform 0.3s ease;
+          display: inline-block;
+        }
+
+        .full-story-three .btn:hover {
+          color: var(--marigold-soft);
+          border-bottom-color: var(--marigold-soft);
+        }
+
+        .full-story-three .btn:hover::after {
+          transform: translateX(6px);
+        }
+
+        .full-story-three .corner {
+          position: absolute;
+          width: 32px;
+          height: 32px;
+          border-color: rgba(255, 253, 248, 0.06);
+          border-style: solid;
+          border-width: 0;
+          z-index: 2;
+        }
+
+        .full-story-three .corner-tl { top: 20px; left: 20px; border-top-width: 1px; border-left-width: 1px; }
+        .full-story-three .corner-tr { top: 20px; right: 20px; border-top-width: 1px; border-right-width: 1px; }
+        .full-story-three .corner-bl { bottom: 20px; left: 20px; border-bottom-width: 1px; border-left-width: 1px; }
+        .full-story-three .corner-br { bottom: 20px; right: 20px; border-bottom-width: 1px; border-right-width: 1px; }
+
+        .full-story-three .slide-up {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                      transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .full-story-three .slide-up.visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        @media (max-width: 860px) {
+          .full-story-three { min-height: 60vh; }
+          .full-story-three .title { font-size: clamp(24px, 3.5vw, 32px); }
+          .full-story-three .corner { width: 20px; height: 20px; }
+          .full-story-three .corner-tl, .full-story-three .corner-tr { top: 12px; }
+          .full-story-three .corner-bl, .full-story-three .corner-br { bottom: 12px; }
+          .full-story-three .corner-tl, .full-story-three .corner-bl { left: 12px; }
+          .full-story-three .corner-tr, .full-story-three .corner-br { right: 12px; }
+        }
+
+        @media (max-width: 600px) {
+          .full-story-three { min-height: 50vh; }
+          .full-story-three .content { padding: 40px 20px; }
+          .full-story-three .title { font-size: clamp(20px, 4vw, 26px); }
+          .full-story-three .desc { font-size: 13px; }
+          .full-story-three .corner { display: none; }
+        }
+      `}</style>
+
+      <section className="full-story-three re-sans">
+        <div className="image-wrapper">
+          <Image
+            src="https://res.cloudinary.com/dzoxwk1jc/image/upload/v1783318295/20_a0qo69.png"
+            alt="Artisan at work - Rajasthani craftsmanship"
+            fill
+            sizes="100vw"
+            style={{
+              objectFit: "cover",
+              objectPosition: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </div>
+        <div className="overlay" />
+
+        <span className="corner corner-tl" />
+        <span className="corner corner-tr" />
+        <span className="corner corner-bl" />
+        <span className="corner corner-br" />
+
+        <div 
+          ref={elementRef}
+          className={`content slide-up ${isVisible ? 'visible' : ''}`}
+        >
+          <span className="tag">✦ Craftsmanship</span>
+          <h2 className="title">Every piece tells a story of devotion</h2>
+          <p className="desc">
+            From the hands of master artisans, each creation carries the spirit of Rajasthan.
+          </p>
+          <Link href="/collections" className="btn">Discover the Art</Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* =========================================================================
    ARTISAN STORY SECTION
    ========================================================================= */
 function ArtisanStorySection() {
@@ -1452,69 +1856,67 @@ function ArtisanStorySection() {
       `}</style>
 
       <section className="story-section re-sans">
-        <div className="story-grid">
-          <div className="story-content">
-            <span className="eyebrow">Our Craft</span>
+  <div className="story-grid">
+    <div className="story-content">
+      <span className="eyebrow">The Atelier</span>
 
-            <h2>
-              Every piece begins in a workshop, not a factory.
-            </h2>
+      <h2>
+        Where hands remember what machines forget.
+      </h2>
 
-            <p className="lead">
-              We work directly with over fifty artisan families across Jaipur, Jodhpur, and
-              Udaipur — paying fair prices for skills that take years to learn and a
-              lifetime to master.
-            </p>
+      <p className="lead">
+        Fifty families. Three cities. One unbroken thread of craft, passed across generations.
+      </p>
 
-            <div className="story-points">
-              {points.map((point) => (
-                <div key={point.title} className="story-point-item">
-                  <div className="story-point-icon">
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M4 12l5 5L20 6" />
-                    </svg>
-                  </div>
-                  <div className="story-point-text">
-                    <h4>{point.title}</h4>
-                    <p>{point.copy}</p>
-                  </div>
-                </div>
-              ))}
+      <div className="story-points">
+        {points.map((point) => (
+          <div key={point.title} className="story-point-item">
+            <div className="story-point-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 12l5 5L20 6" />
+              </svg>
             </div>
-
-            <Link href="/collections" className="story-link">
-              Explore the Collections
-            </Link>
-          </div>
-
-          <div 
-            ref={elementRef}
-            className={`story-image-wrapper slide-in-right ${isVisible ? 'visible' : ''}`}
-          >
-            <div className="story-image-frame">
-              <Image
-                src={placeholderImages.main}
-                alt="Artisan working on traditional Rajasthani handicraft"
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
-              <div className="image-overlay" />
-
-              <span className="corner corner-tl" />
-              <span className="corner corner-tr" />
-              <span className="corner corner-bl" />
-              <span className="corner corner-br" />
-
-              <div className="story-badge">
-                <span>✦</span> Artisan Mastery
-              </div>
+            <div className="story-point-text">
+              <h4>{point.title}</h4>
+              <p>{point.copy}</p>
             </div>
           </div>
+        ))}
+      </div>
+
+      <Link href="/collections" className="story-link">
+        View the Collection
+      </Link>
+    </div>
+
+    <div 
+      ref={elementRef}
+      className={`story-image-wrapper slide-in-right ${isVisible ? 'visible' : ''}`}
+    >
+      <div className="story-image-frame">
+        <Image
+          src="https://res.cloudinary.com/dzoxwk1jc/image/upload/v1783318693/22_egv4cn.png"
+          alt="Artisan working on traditional Rajasthani handicraft"
+          fill
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+        />
+        <div className="image-overlay" />
+
+        <span className="corner corner-tl" />
+        <span className="corner corner-tr" />
+        <span className="corner corner-bl" />
+        <span className="corner corner-br" />
+
+        <div className="story-badge">
+          <span>✦</span> Artisan Mastery
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
     </>
   );
 }
@@ -2050,7 +2452,7 @@ export default function HomePage() {
           <div className="overlay" />
         </div>
         <div className="feature-content">
-          <span className="tag">✦ Featured</span>
+          <span className="tag"></span>
           <h3>Wooden Hindu Temple Shrine</h3>
           <p>Intricately carved wooden shrine reflecting centuries of temple architecture.</p>
           <span className="learn-more">View Collection →</span>
@@ -2077,7 +2479,7 @@ export default function HomePage() {
             <div className="overlay" />
           </div>
           <div className="mini-content">
-            <span className="tag">✦ Pottery</span>
+            <span className="tag"></span>
             <h4>Pottery</h4>
             <p>Earth's memory shaped by patient hands</p>
             <span className="explore-link">Explore →</span>
@@ -2102,7 +2504,7 @@ export default function HomePage() {
             <div className="overlay" />
           </div>
           <div className="mini-content">
-            <span className="tag">✦ Jewelry</span>
+            <span className="tag"></span>
             <h4>Jewelry</h4>
             <p>Adornments that carry stories of generations</p>
             <span className="explore-link">Explore →</span>
@@ -2127,7 +2529,7 @@ export default function HomePage() {
             <div className="overlay" />
           </div>
           <div className="mini-content">
-            <span className="tag">✦ Paintings</span>
+            <span className="tag"></span>
             <h4>Paintings</h4>
             <p>Visionary tales on cloth and paper</p>
             <span className="explore-link">Explore →</span>
@@ -2152,7 +2554,7 @@ export default function HomePage() {
             <div className="overlay" />
           </div>
           <div className="mini-content">
-            <span className="tag">✦ Woodcraft</span>
+            <span className="tag"></span>
             <h4>Woodcraft</h4>
             <p>Timeless forms carved from nature's bounty</p>
             <span className="explore-link">Explore →</span>
@@ -2163,7 +2565,8 @@ export default function HomePage() {
   </div>
 </section>
 <MovingLineDivider />
-<FeaturedStorySection />
+<FullWidthStorySectionTwo />
+
 
       {/* ornamental divider */}
       <div style={{ background: "var(--sand)" }}>
@@ -2298,6 +2701,8 @@ export default function HomePage() {
 <FullWidthStorySection />
       <ArtisanStorySection />
 
+      <FullWidthStorySectionThree />
+
       
 
       {/* Closing Band */}
@@ -2347,6 +2752,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      <FeaturedStorySection />
     </>
   );
 }

@@ -214,13 +214,38 @@ export default function ContactPage() {
           transform: translateY(0);
         }
 
+        /* Page Container - Increased padding-top */
+        .contact-page {
+          background: linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%);
+          padding: 100px 24px 80px;
+          min-height: calc(100vh - 200px);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .contact-page .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          padding: 0;
+        }
+
+        /* Responsive Styles */
         @media (max-width: 1024px) {
+          .contact-page {
+            padding: 90px 20px 64px;
+          }
           .contact-grid {
             gap: 32px !important;
           }
         }
 
         @media (max-width: 860px) {
+          .contact-page {
+            padding: 80px 16px 56px;
+          }
           .contact-grid {
             grid-template-columns: 1fr !important;
             gap: 32px !important;
@@ -234,9 +259,21 @@ export default function ContactPage() {
           .contact-image-wrapper {
             padding-top: 60% !important;
           }
+          .contact-serif {
+            font-size: clamp(32px, 5vw, 42px) !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .contact-page {
+            padding-top: 72px;
+          }
         }
 
         @media (max-width: 600px) {
+          .contact-page {
+            padding: 64px 12px 48px;
+          }
           .contact-form-section form {
             padding: 24px 20px !important;
           }
@@ -246,19 +283,75 @@ export default function ContactPage() {
           .contact-image-wrapper {
             padding-top: 75% !important;
           }
+          .contact-serif {
+            font-size: clamp(28px, 6vw, 36px) !important;
+          }
+          .contact-eyebrow {
+            font-size: 10px !important;
+          }
+          .contact-info-item {
+            font-size: 13px;
+            padding: 8px 0;
+          }
+          .contact-info-label {
+            min-width: 60px;
+            font-size: 9px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .contact-page {
+            padding: 56px 10px 40px;
+          }
+          .contact-image-wrapper {
+            padding-top: 80% !important;
+          }
+          .contact-form-section form {
+            padding: 20px 16px !important;
+          }
+          .contact-info-section .info-card {
+            padding: 16px !important;
+          }
+          .contact-serif {
+            font-size: clamp(24px, 5vw, 30px) !important;
+          }
+          .contact-input {
+            font-size: 14px;
+            padding: 10px 14px;
+          }
+          .contact-btn {
+            font-size: 11px;
+            padding: 13px 28px;
+          }
+          .contact-status {
+            font-size: 13px;
+            padding: 12px 14px;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .contact-page {
+            padding: 48px 8px 32px;
+          }
+          .contact-serif {
+            font-size: 22px !important;
+          }
+          .contact-info-item {
+            font-size: 12px;
+            flex-wrap: wrap;
+            gap: 6px;
+          }
+          .contact-info-label {
+            min-width: 50px;
+            font-size: 8px;
+          }
+          .contact-form-section form {
+            padding: 16px 12px !important;
+          }
         }
       `}</style>
 
-      <section 
-        className="contact-sans"
-        style={{
-          background: "linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%)",
-          padding: "40px 24px 80px",
-          minHeight: "calc(100vh - 200px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
+      <section className="contact-page">
         {/* Decorative background element */}
         <svg
           aria-hidden="true"
@@ -270,6 +363,7 @@ export default function ContactPage() {
             width: 350,
             height: 350,
             opacity: 0.05,
+            pointerEvents: "none",
           }}
         >
           <g stroke="#b9862f" strokeWidth="1">
@@ -293,15 +387,7 @@ export default function ContactPage() {
           </g>
         </svg>
 
-        <div 
-          className="container" 
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="container">
           {/* Header Section */}
           <div 
             style={{
@@ -326,9 +412,6 @@ export default function ContactPage() {
               }}
             />
 
-            <span className="contact-eyebrow">
-              Get in Touch
-            </span>
 
             <h1 
               className="contact-serif"
@@ -352,6 +435,7 @@ export default function ContactPage() {
               gridTemplateColumns: "1fr 1fr",
               gap: 48,
               alignItems: "start",
+              width: "100%",
             }}
           >
             {/* Left Column - Info */}
@@ -363,6 +447,7 @@ export default function ContactPage() {
                     src="https://res.cloudinary.com/dlomq2b7z/image/upload/v1783100252/2_xotxvk.jpg"
                     alt="Rajasthani handicrafts showcase - contact us"
                     fill
+                    sizes="(max-width: 480px) 100vw, (max-width: 860px) 80vw, 40vw"
                     style={{ objectFit: "cover", objectPosition: "center" }}
                   />
                   <div className="contact-image-overlay">
@@ -400,11 +485,11 @@ export default function ContactPage() {
                 </div>
                 <div className="contact-info-item">
                   <span className="contact-info-label">Email</span>
-                  <span className="contact-info-value">hello@rajasthanemporium.com</span>
+                  <span className="contact-info-value">rajasthanemporium@gmail.com</span>
                 </div>
                 <div className="contact-info-item">
                   <span className="contact-info-label">Address</span>
-                  <span className="contact-info-value">Jaipur, Rajasthan</span>
+                  <span className="contact-info-value">Bengaluru, Karnataka</span>
                 </div>
               </div>
 

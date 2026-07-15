@@ -1,3 +1,5 @@
+"use client";
+
 import { ProductGrid } from "@/components/collections/ProductGrid";
 import Image from "next/image";
 import Link from "next/link";
@@ -110,57 +112,153 @@ export default function CollectionsPage() {
           opacity: 0.3;
         }
 
+        .collections-page {
+          background: linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%);
+          padding: 100px 0 80px;
+          min-height: calc(100vh - 200px);
+          position: relative;
+          display: flex;
+          justify-content: center;
+          width: 100%;
+        }
+
+        .collections-page .container {
+          max-width: 1280px;
+          width: 100%;
+          position: relative;
+          z-index: 1;
+          padding: 0 24px;
+        }
+
+        .collections-product-section {
+          width: 100%;
+          max-width: 1160px;
+          margin: 0 auto;
+        }
+
+        /* Desktop and larger screens */
+        @media (min-width: 1025px) {
+          .collections-page .container {
+            padding: 0 24px;
+          }
+        }
+
+        /* Tablet and smaller desktop */
         @media (max-width: 1024px) {
+          .collections-page {
+            padding: 90px 0 64px;
+          }
+          .collections-page .container {
+            padding: 0 20px;
+          }
           .collections-hero-image {
-            padding-top: 45%;
+            padding-top: 42%;
+            margin-bottom: 36px;
           }
         }
 
         @media (max-width: 860px) {
+          .collections-page {
+            padding: 80px 0 56px;
+          }
+          .collections-page .container {
+            padding: 0 16px;
+          }
           .collections-hero-image {
-            padding-top: 55%;
+            padding-top: 50%;
+            margin-bottom: 32px;
           }
           .collections-hero-image .hero-text {
             bottom: 8%;
             left: 5%;
-            max-width: 80%;
+            max-width: 85%;
           }
           .collections-hero-image .hero-text h2 {
-            font-size: 20px;
+            font-size: clamp(20px, 2.5vw, 26px);
           }
           .collections-stats-row {
             justify-content: flex-start;
+            font-size: 11px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .collections-page {
+            padding-top: 72px;
           }
         }
 
         @media (max-width: 600px) {
+          .collections-page {
+            padding: 64px 0 48px;
+          }
+          .collections-page .container {
+            padding: 0 12px;
+          }
           .collections-hero-image {
             padding-top: 65%;
+            margin-bottom: 24px;
           }
           .collections-hero-image .hero-text {
             bottom: 6%;
             left: 4%;
-            max-width: 90%;
+            max-width: 92%;
           }
           .collections-hero-image .hero-text h2 {
-            font-size: 18px;
+            font-size: clamp(16px, 4vw, 22px);
           }
           .collections-hero-image .hero-text p {
-            font-size: 12px;
+            font-size: 11px;
           }
+          .collections-stats-row {
+            font-size: 10px;
+            flex-wrap: wrap;
+          }
+          .collections-serif {
+            font-size: clamp(28px, 6vw, 36px) !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .collections-page {
+            padding: 56px 0 40px;
+          }
+          .collections-page .container {
+            padding: 0 10px;
+          }
+          .collections-hero-image {
+            padding-top: 75%;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .collections-page {
+            padding: 48px 0 32px;
+          }
+          .collections-page .container {
+            padding: 0 8px;
+          }
+          .collections-hero-image {
+            padding-top: 85%;
+          }
+          .collections-hero-image .hero-text h2 {
+            font-size: 14px;
+          }
+          .collections-hero-image .hero-text p {
+            font-size: 10px;
+          }
+          .collections-serif {
+            font-size: 22px !important;
+          }
+        }
+
+        /* Ensure ProductGrid also respects centering */
+        .collections-product-section > * {
+          width: 100%;
         }
       `}</style>
 
-      <section 
-        className="collections-sans"
-        style={{
-          background: "linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%)",
-          padding: "40px 24px 80px",
-          minHeight: "calc(100vh - 200px)",
-          position: "relative",
-        }}
-      >
-        {/* Decorative background element */}
+      <section className="collections-page">
         <svg
           aria-hidden="true"
           viewBox="0 0 400 400"
@@ -171,6 +269,7 @@ export default function CollectionsPage() {
             width: 400,
             height: 400,
             opacity: 0.05,
+            pointerEvents: "none",
           }}
         >
           <g stroke="#b9862f" strokeWidth="1">
@@ -194,15 +293,7 @@ export default function CollectionsPage() {
           </g>
         </svg>
 
-        <div 
-          className="container" 
-          style={{
-            maxWidth: 1280,
-            margin: "0 auto",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="container">
           {/* Header Section */}
           <div 
             style={{
@@ -227,10 +318,6 @@ export default function CollectionsPage() {
               }}
             />
 
-            <span className="collections-eyebrow">
-              The Emporium
-            </span>
-
             <h1 
               className="collections-serif"
               style={{
@@ -245,6 +332,7 @@ export default function CollectionsPage() {
             </h1>
 
             <p 
+              className="header-description"
               style={{
                 margin: 0,
                 maxWidth: 640,
@@ -266,7 +354,9 @@ export default function CollectionsPage() {
               src="https://res.cloudinary.com/dlomq2b7z/image/upload/v1783100252/2_xotxvk.jpg"
               alt="Rajasthani handicrafts collection display"
               fill
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1200px) 80vw, 70vw"
               style={{ objectFit: "cover", objectPosition: "center" }}
+              priority
             />
             <div className="overlay" />
             <div className="hero-text">
@@ -283,8 +373,10 @@ export default function CollectionsPage() {
             <span>Categories</span>
           </div>
 
-          {/* Product Grid - contains its own CategoryFilter */}
-          <ProductGrid />
+          {/* Product Grid - with filter inside */}
+          <div className="collections-product-section">
+            <ProductGrid />
+          </div>
         </div>
       </section>
     </>

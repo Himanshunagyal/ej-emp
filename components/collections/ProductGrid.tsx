@@ -41,16 +41,19 @@ export function ProductGrid() {
         .product-grid-wrapper {
           display: grid;
           gap: 32px;
+          width: 100%;
         }
 
         .product-grid-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 16px;
+          display: grid;
+          gap: 12px;
           padding-bottom: 16px;
           border-bottom: 1px solid rgba(36, 26, 21, 0.06);
+        }
+
+        .product-grid-header .filter-container {
+          width: 100%;
+          margin-bottom: 0;
         }
 
         .product-grid-results {
@@ -61,6 +64,7 @@ export function ProductGrid() {
           display: flex;
           align-items: center;
           gap: 8px;
+          justify-self: center;
         }
 
         .product-grid-results .count {
@@ -106,7 +110,8 @@ export function ProductGrid() {
 
         .product-grid-loading {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+          justify-content: center;
           gap: 26px;
         }
 
@@ -132,25 +137,24 @@ export function ProductGrid() {
 
         .product-grid-cards {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
+          justify-content: center;
           gap: 26px;
         }
 
         @media (max-width: 860px) {
           .product-grid-header {
-            flex-direction: column;
-            align-items: flex-start;
             gap: 8px;
           }
           .product-grid-cards {
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 360px));
             gap: 20px;
           }
         }
 
         @media (max-width: 600px) {
           .product-grid-cards {
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 14px;
           }
           .product-grid-wrapper {

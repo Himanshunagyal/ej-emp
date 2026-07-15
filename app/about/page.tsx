@@ -206,7 +206,29 @@ export default function AboutPage() {
           text-transform: uppercase;
         }
 
+        /* Page Container - Added padding-top to push content down */
+        .about-page {
+          background: linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%);
+          padding: 100px 24px 80px;
+          min-height: calc(100vh - 200px);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .about-page .container {
+          max-width: 1100px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 1;
+          width: 100%;
+          padding: 0;
+        }
+
+        /* Responsive Styles */
         @media (max-width: 1024px) {
+          .about-page {
+            padding: 90px 20px 64px;
+          }
           .about-gallery-grid {
             grid-template-columns: repeat(3, 1fr);
           }
@@ -216,6 +238,9 @@ export default function AboutPage() {
         }
 
         @media (max-width: 860px) {
+          .about-page {
+            padding: 80px 16px 56px;
+          }
           .about-gallery-grid {
             grid-template-columns: repeat(2, 1fr);
           }
@@ -231,9 +256,37 @@ export default function AboutPage() {
           .about-quote-block p {
             font-size: 18px;
           }
+          .about-serif {
+            font-size: clamp(32px, 5vw, 42px) !important;
+          }
+          .about-page .intro-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
+          .about-page .intro-image {
+            order: -1;
+            max-width: 500px;
+            margin: 0 auto;
+            width: 100%;
+          }
+          .about-page .intro-text {
+            text-align: center;
+          }
+          .about-page .content-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .about-page {
+            padding-top: 72px;
+          }
         }
 
         @media (max-width: 600px) {
+          .about-page {
+            padding: 64px 12px 48px;
+          }
           .about-gallery-grid {
             grid-template-columns: 1fr 1fr;
             gap: 4px;
@@ -250,19 +303,99 @@ export default function AboutPage() {
           .about-quote-block p {
             font-size: 16px;
           }
+          .about-serif {
+            font-size: clamp(28px, 6vw, 36px) !important;
+          }
+          .about-eyebrow {
+            font-size: 10px !important;
+          }
+          .about-page .intro-text p {
+            font-size: 15px !important;
+          }
+          .about-page .intro-text .card {
+            padding: 24px 20px !important;
+          }
+          .about-page .content-grid .card {
+            padding: 20px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .about-page {
+            padding: 56px 10px 40px;
+          }
+          .about-gallery-grid {
+            gap: 3px;
+          }
+          .about-gallery-grid .about-image-card .image-label {
+            font-size: 9px;
+            padding: 4px 10px;
+          }
+          .about-serif {
+            font-size: clamp(24px, 5vw, 30px) !important;
+          }
+          .about-value-card {
+            padding: 20px 16px;
+          }
+          .about-value-card h4 {
+            font-size: 16px;
+          }
+          .about-value-card p {
+            font-size: 12.5px;
+          }
+          .about-quote-block {
+            padding: 20px 16px;
+          }
+          .about-quote-block p {
+            font-size: 15px;
+          }
+          .about-quote-block .attribution {
+            font-size: 11px;
+          }
+          .about-page .content-grid .card h3 {
+            font-size: 17px !important;
+          }
+          .about-page .content-grid .card p {
+            font-size: 13px !important;
+          }
+        }
+
+        @media (max-width: 380px) {
+          .about-page {
+            padding: 48px 8px 32px;
+          }
+          .about-gallery-grid {
+            gap: 2px;
+          }
+          .about-gallery-grid .about-image-card .image-overlay {
+            padding: 12px;
+          }
+          .about-gallery-grid .about-image-card .image-label {
+            font-size: 8px;
+            padding: 3px 8px;
+          }
+          .about-serif {
+            font-size: 22px !important;
+          }
+          .about-page .intro-text p {
+            font-size: 14px !important;
+          }
+          .about-page .intro-text .card {
+            padding: 16px !important;
+          }
+          .about-value-card {
+            padding: 16px 12px;
+          }
+          .about-value-card .icon {
+            font-size: 26px;
+          }
+          .about-quote-block p {
+            font-size: 14px;
+          }
         }
       `}</style>
 
-      <section 
-        className="about-sans"
-        style={{
-          background: "linear-gradient(180deg, #faf6ee 0%, #f6f0e4 40%, #ece2cd 100%)",
-          padding: "40px 24px 80px",
-          minHeight: "calc(100vh - 200px)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
+      <section className="about-page">
         {/* Decorative background element */}
         <svg
           aria-hidden="true"
@@ -274,6 +407,7 @@ export default function AboutPage() {
             width: 450,
             height: 450,
             opacity: 0.06,
+            pointerEvents: "none",
           }}
         >
           <g stroke="#a8823d" strokeWidth="1">
@@ -297,15 +431,7 @@ export default function AboutPage() {
           </g>
         </svg>
 
-        <div 
-          className="container" 
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="container">
           {/* Header Section */}
           <div 
             style={{
@@ -330,9 +456,6 @@ export default function AboutPage() {
               }}
             />
 
-            <span className="about-eyebrow">
-              Our Story
-            </span>
 
             <h1 
               className="about-serif"
@@ -349,20 +472,26 @@ export default function AboutPage() {
           </div>
 
           {/* Introduction with Image */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: 40,
-            marginBottom: 48,
-            alignItems: "center",
-          }}>
-            <div>
-              <div style={{
-                background: "rgba(255, 253, 248, 0.6)",
-                padding: "32px 36px",
-                border: "1px solid rgba(42, 33, 28, 0.06)",
-                borderRadius: 2,
-              }}>
+          <div 
+            className="intro-grid"
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 40,
+              marginBottom: 48,
+              alignItems: "center",
+            }}
+          >
+            <div className="intro-text">
+              <div 
+                className="card"
+                style={{
+                  background: "rgba(255, 253, 248, 0.6)",
+                  padding: "32px 36px",
+                  border: "1px solid rgba(42, 33, 28, 0.06)",
+                  borderRadius: 2,
+                }}
+              >
                 <p style={{ 
                   margin: 0, 
                   fontWeight: 300,
@@ -377,16 +506,19 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
-            <div className="about-image-card">
-              <div className="about-image-wrapper" style={{ paddingTop: "75%" }}>
-                <Image
-                  src="https://res.cloudinary.com/dlomq2b7z/image/upload/v1783100251/1_dn5utr.jpg"
-                  alt="Artisan working on traditional Rajasthani handicraft in workshop"
-                  fill
-                  style={{ objectFit: "cover", objectPosition: "center" }}
-                />
-                <div className="image-overlay">
-                  <span className="image-label">✦ Artisan at Work</span>
+            <div className="intro-image">
+              <div className="about-image-card">
+                <div className="about-image-wrapper" style={{ paddingTop: "75%" }}>
+                  <Image
+                    src="https://res.cloudinary.com/dlomq2b7z/image/upload/v1783100251/1_dn5utr.jpg"
+                    alt="Artisan working on traditional Rajasthani handicraft in workshop"
+                    fill
+                    sizes="(max-width: 480px) 100vw, (max-width: 860px) 80vw, 40vw"
+                    style={{ objectFit: "cover", objectPosition: "center" }}
+                  />
+                  <div className="image-overlay">
+                    <span className="image-label">✦ Artisan at Work</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -432,6 +564,7 @@ export default function AboutPage() {
                       src={item.image}
                       alt={item.label}
                       fill
+                      sizes="(max-width: 480px) 50vw, (max-width: 860px) 33vw, 20vw"
                       style={{ objectFit: "cover", objectPosition: "center" }}
                     />
                     <div className="image-overlay">
@@ -507,22 +640,31 @@ export default function AboutPage() {
           </div>
 
           {/* Content Sections */}
-          <div style={{
-            display: "grid",
-            gap: 24,
-            paddingTop: 12,
-          }}>
-            <div style={{
+          <div 
+            className="content-grid"
+            style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
               gap: 24,
-            }}>
-              <div style={{
-                padding: "24px 28px",
-                background: "rgba(255, 253, 248, 0.4)",
-                border: "1px solid rgba(42, 33, 28, 0.06)",
-                borderRadius: 2,
-              }}>
+              paddingTop: 12,
+            }}
+          >
+            <div 
+              className="content-grid-inner"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: 24,
+              }}
+            >
+              <div 
+                className="card"
+                style={{
+                  padding: "24px 28px",
+                  background: "rgba(255, 253, 248, 0.4)",
+                  border: "1px solid rgba(42, 33, 28, 0.06)",
+                  borderRadius: 2,
+                }}
+              >
                 <h3 className="about-serif" style={{
                   margin: "0 0 8px",
                   fontSize: 20,
@@ -542,12 +684,15 @@ export default function AboutPage() {
                   and Udaipur, each specializing in their unique craft.
                 </p>
               </div>
-              <div style={{
-                padding: "24px 28px",
-                background: "rgba(255, 253, 248, 0.4)",
-                border: "1px solid rgba(42, 33, 28, 0.06)",
-                borderRadius: 2,
-              }}>
+              <div 
+                className="card"
+                style={{
+                  padding: "24px 28px",
+                  background: "rgba(255, 253, 248, 0.4)",
+                  border: "1px solid rgba(42, 33, 28, 0.06)",
+                  borderRadius: 2,
+                }}
+              >
                 <h3 className="about-serif" style={{
                   margin: "0 0 8px",
                   fontSize: 20,
@@ -569,14 +714,16 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* FIXED: Removed duplicate margin property */}
-            <div style={{
-              padding: "24px 28px",
-              background: "rgba(255, 253, 248, 0.4)",
-              border: "1px solid rgba(42, 33, 28, 0.06)",
-              borderRadius: 2,
-              textAlign: "center",
-            }}>
+            <div 
+              className="card"
+              style={{
+                padding: "24px 28px",
+                background: "rgba(255, 253, 248, 0.4)",
+                border: "1px solid rgba(42, 33, 28, 0.06)",
+                borderRadius: 2,
+                textAlign: "center",
+              }}
+            >
               <h3 className="about-serif" style={{
                 margin: "0 0 8px",
                 fontSize: 20,

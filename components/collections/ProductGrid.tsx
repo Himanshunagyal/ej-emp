@@ -212,9 +212,9 @@ export function ProductGrid() {
               </div>
             ) : (
               <div className="product-grid-cards">
-                {filteredProducts.map((product) => (
+                {filteredProducts.map((product, index) => (
                   <ProductCard 
-                    key={product._id || product.slug} 
+                    key={product._id || `${product.category}-${index}`} 
                     product={product} 
                     onView={setSelectedProduct} 
                   />

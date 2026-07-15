@@ -10,7 +10,7 @@ type Context = {
 
 function getProductErrorMessage(error: unknown) {
   if (typeof error === "object" && error !== null && "code" in error && error.code === 11000) {
-    return "A product with this slug already exists. Use a different slug.";
+    return "A product with the same unique value already exists.";
   }
 
   if (error instanceof Error) {

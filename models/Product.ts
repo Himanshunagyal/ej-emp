@@ -2,11 +2,8 @@ import mongoose, { Schema, models } from "mongoose";
 
 const ProductSchema = new Schema(
   {
-    name: { type: String, required: true, trim: true },
-    slug: { type: String, required: true, unique: true, trim: true },
+    // Removed: name, slug, description, longDescription
     category: { type: String, required: true, trim: true },
-    description: { type: String, required: true, trim: true },
-    longDescription: { type: String, default: "" },
     images: [{ type: String }],
     color: { type: String, default: "" },
     inStock: { type: Boolean, default: true },

@@ -1,9 +1,10 @@
 export type Product = {
   _id?: string;
-  name: string;
-  slug: string;
+  // Optional legacy fields used only by the static sample content.
+  name?: string;
+  slug?: string;
   category: string;
-  description: string;
+  description?: string;
   longDescription?: string;
   images: string[];
   color?: string;

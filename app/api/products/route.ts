@@ -6,7 +6,7 @@ import Product from "@/models/Product";
 
 function getProductErrorMessage(error: unknown) {
   if (typeof error === "object" && error !== null && "code" in error && error.code === 11000) {
-    return "A product with this slug already exists. Use a different slug.";
+    return "A product with the same unique value already exists.";
   }
 
   if (error instanceof Error) {
@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
 
   try {
     await connectDB();
-    const product = await Product.create(await parseProductRequest(request, { allowNameSlug: true }));
+    const productData = await parseProductRequest(request);
+    const product = await Product.create(productData);
     return NextResponse.json(product, { status: 201 });
   } catch (error) {
     return NextResponse.json({ message: getProductErrorMessage(error) }, { status: 400 });

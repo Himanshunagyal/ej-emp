@@ -110,28 +110,6 @@ export function ProductCard({ product, onView }: Props) {
           background: linear-gradient(90deg, rgba(185, 134, 47, 0.2), transparent);
         }
 
-        .product-name {
-          font-family: "Playfair Display", "Cormorant Garamond", Georgia, serif;
-          font-size: clamp(18px, 1.3vw, 22px);
-          font-weight: 600;
-          color: #241a15;
-          margin: 0;
-          line-height: 1.2;
-        }
-
-        .product-description {
-          font-family: "Jost", sans-serif;
-          font-size: 13.5px;
-          font-weight: 300;
-          color: #6b5f54;
-          margin: 0;
-          line-height: 1.6;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-
         .product-footer {
           display: flex;
           align-items: center;
@@ -175,12 +153,6 @@ export function ProductCard({ product, onView }: Props) {
           .product-details {
             padding: 16px 18px 20px;
           }
-          .product-name {
-            font-size: 17px;
-          }
-          .product-description {
-            font-size: 12.5px;
-          }
         }
       `}</style>
 
@@ -199,7 +171,7 @@ export function ProductCard({ product, onView }: Props) {
         <div className="product-image-wrapper">
           <Image 
             src={image} 
-            alt={product.name} 
+            alt={product.category} 
             fill 
             sizes="(max-width: 768px) 100vw, 33vw" 
             style={{ objectFit: "cover" }} 
@@ -211,8 +183,6 @@ export function ProductCard({ product, onView }: Props) {
 
         <div className="product-details">
           <span className="product-category">{product.category}</span>
-          <h3 className="product-name">{product.name}</h3>
-          <p className="product-description">{product.description}</p>
           
           <div className="product-footer">
             <button 

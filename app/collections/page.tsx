@@ -91,64 +91,21 @@ export default function CollectionsPage() {
           line-height: 1.6;
         }
 
-        .collections-filter-bar {
-          display: flex;
-          gap: 12px;
-          flex-wrap: wrap;
-          margin-bottom: 32px;
-          padding: 16px 0;
-          border-bottom: 1px solid rgba(42, 33, 28, 0.06);
-        }
-
-        .collections-filter-bar .filter-label {
-          font-family: "Jost", sans-serif;
-          font-size: 10px;
-          font-weight: 500;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: #6b5f54;
+        .collections-stats-row {
           display: flex;
           align-items: center;
-          margin-right: 8px;
-        }
-
-        .collections-filter-bar .filter-btn {
-          font-family: "Jost", sans-serif;
-          font-size: 12px;
-          font-weight: 400;
-          padding: 6px 18px;
-          border: 1px solid rgba(42, 33, 28, 0.08);
-          border-radius: 2px;
-          background: transparent;
-          color: #6b5f54;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .collections-filter-bar .filter-btn:hover {
-          border-color: #b9862f;
-          color: #241a15;
-          background: rgba(185, 134, 47, 0.04);
-        }
-
-        .collections-filter-bar .filter-btn.active {
-          border-color: #b9862f;
-          color: #4d0e17;
-          background: rgba(185, 134, 47, 0.08);
-        }
-
-        .collections-stats {
-          display: flex;
-          align-items: center;
+          justify-content: flex-end;
           gap: 12px;
-          margin-left: auto;
+          margin-bottom: 24px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid rgba(42, 33, 28, 0.04);
           font-family: "Jost", sans-serif;
           font-size: 12px;
           font-weight: 300;
           color: #8a7a6b;
         }
 
-        .collections-stats .dot {
+        .collections-stats-row .dot {
           color: #b9862f;
           opacity: 0.3;
         }
@@ -171,16 +128,8 @@ export default function CollectionsPage() {
           .collections-hero-image .hero-text h2 {
             font-size: 20px;
           }
-          .collections-filter-bar {
-            flex-wrap: wrap;
-            gap: 8px;
-          }
-          .collections-stats {
-            margin-left: 0;
-            width: 100%;
+          .collections-stats-row {
             justify-content: flex-start;
-            padding-top: 8px;
-            border-top: 1px solid rgba(42, 33, 28, 0.04);
           }
         }
 
@@ -198,10 +147,6 @@ export default function CollectionsPage() {
           }
           .collections-hero-image .hero-text p {
             font-size: 12px;
-          }
-          .collections-filter-bar .filter-btn {
-            font-size: 11px;
-            padding: 4px 14px;
           }
         }
       `}</style>
@@ -331,23 +276,14 @@ export default function CollectionsPage() {
             </div>
           </div>
 
-          {/* Filter Bar */}
-          <div className="collections-filter-bar">
-            <span className="filter-label">Browse:</span>
-            <button className="filter-btn active">All</button>
-            <button className="filter-btn">Textiles</button>
-            <button className="filter-btn">Pottery</button>
-            <button className="filter-btn">Jewelry</button>
-            <button className="filter-btn">Paintings</button>
-            <button className="filter-btn">Decor</button>
-            <div className="collections-stats">
-              <span>12 products</span>
-              <span className="dot">◆</span>
-              <span>6 categories</span>
-            </div>
+          {/* Stats Row */}
+          <div className="collections-stats-row">
+            <span>{/* products count will be dynamic */}</span>
+            <span className="dot">◆</span>
+            <span>Categories</span>
           </div>
 
-          {/* Product Grid */}
+          {/* Product Grid - contains its own CategoryFilter */}
           <ProductGrid />
         </div>
       </section>

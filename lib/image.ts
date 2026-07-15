@@ -1,12 +1,10 @@
-const PLACEHOLDER_IMAGE = "https://via.placeholder.com/900x650?text=Rajasthan+Emporium";
+// lib/image.ts
+// A local asset prevents Next/Image from requesting a placeholder Cloudinary URL.
+const FALLBACK_IMAGE = "/images/logo.jpeg";
 
-export function getSafeImageSrc(src?: string) {
-  const value = src?.trim();
-
-  if (!value) return PLACEHOLDER_IMAGE;
-  if (value.startsWith("/") || value.startsWith("http://") || value.startsWith("https://")) {
-    return value;
+export function getSafeImageSrc(image: string | undefined): string {
+  if (!image) {
+    return FALLBACK_IMAGE;
   }
-
-  return PLACEHOLDER_IMAGE;
+  return image;
 }
